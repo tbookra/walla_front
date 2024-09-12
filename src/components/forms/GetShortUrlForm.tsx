@@ -24,9 +24,13 @@ const GetShortUrlForm = ({ setResults }: Props) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(Schema),
+    defaultValues: {
+      fullUrl: "",
+    },
   });
 
   const onSubmit: SubmitHandler<FormData> = async (formData) => {
@@ -39,7 +43,7 @@ const GetShortUrlForm = ({ setResults }: Props) => {
     } catch {
       setResults("not found")
     }
-    
+    reset()
   };
 
   return (

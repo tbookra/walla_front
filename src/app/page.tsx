@@ -12,21 +12,14 @@ export default function Home() {
   const [existsShortString, setExistsShortString] = useState<string>("");
   const [fullUrl, setFullUrl] = useState<string>("");
   const [browseTxt, setBrowseTxt] = useState<string>("");
-  const newUrl = uniqueString
-    ? uniqueString.includes("something went wrong")
-      ? uniqueString
-      : `${BASE_URL}/${uniqueString}`
-    : "";
+  
 
   const handleBrowseClick = async () => {
-    console.log("browseTxt", browseTxt);
-    if (browseTxt.length === 7 ) {
-      const {data} = await axios.get(`${BASE_URL}/get_full_url/${browseTxt}`)
-     
-      window.open(data.url)
-      
+    if (browseTxt.length === 7) {
+      const { data } = await axios.get(`${BASE_URL}/get_full_url/${browseTxt}`);
+      window.open(data.url);
     } else {
-      window.open(browseTxt)
+      window.open(browseTxt);
     }
   };
   return (
@@ -38,7 +31,7 @@ export default function Home() {
             get your <strong>new</strong> short url here:
           </h2>
           <UrlsForm setResults={setUniqueString} />
-          {newUrl}
+          {uniqueString}
         </div>
         <div>
           <h2>get your short url here:</h2>
@@ -52,6 +45,7 @@ export default function Home() {
           {fullUrl}
         </div>
         <div>
+          <h2>Get redirected here:</h2>
           <input
             type="text"
             onChange={(e) => setBrowseTxt(e.target.value)}

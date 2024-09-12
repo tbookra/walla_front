@@ -24,19 +24,23 @@ const UrlsForm = ({ setResults }: Props) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(Schema),
+    defaultValues: {
+      url: "",
+    },
   });
 
   const onSubmit: SubmitHandler<FormData> = async (formData) => {
     const { data } = await axios.post(BASE_URL, formData);
-    console.log("res", data);
     if (data.error) {
       setResults(data?.error);
     } else {
       setResults(data?.shortUrl);
     }
+    reset()
   };
 
   return (
