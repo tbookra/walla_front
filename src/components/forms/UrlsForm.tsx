@@ -33,9 +33,9 @@ const UrlsForm = ({ setResults }: Props) => {
     const { data } = await axios.post(BASE_URL, formData);
     console.log("res", data);
     if (data.error) {
-      setUniqueString(data?.error);
+      setResults(data?.error);
     } else {
-      setUniqueString(data?.shortUrl);
+      setResults(data?.shortUrl);
     }
   };
 
