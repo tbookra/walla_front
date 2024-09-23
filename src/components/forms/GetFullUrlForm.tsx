@@ -36,13 +36,11 @@ const GetFullUrlForm = ({ setResults }: Props) => {
   });
 
   const onSubmit: SubmitHandler<FormData> = async (formData) => {
-    console.log("formData", formData);
     try {
       const { data } = await axios.get(
         `${BASE_URL}/get_full_url/${formData.shortUrl}`
       );
       setResults(data.url);
-      console.log("data", data);
     } catch {
       setResults("not found");
     }
